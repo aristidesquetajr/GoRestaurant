@@ -1,10 +1,10 @@
 import { Routes as Switch, Route } from 'react-router-dom'
-import { Header } from '../components/Header'
+import { Dashboard } from '../pages/Dashboard'
 
 export function Routes() {
   return (
     <Switch>
-      <Route path="/" Component={Header} />
+      <Route path="/" Component={Dashboard} />
     </Switch>
   )
 }
