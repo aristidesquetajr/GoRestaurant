@@ -3,13 +3,13 @@ import { Header } from '../../components/Header'
 import { api } from '../../services/api'
 import { Food } from '../../components/Food'
 import { ModalAddFood } from '../../components/ModalAddFood'
-// import ModalEditFood from '../../components/ModalEditFood'
+import { ModalEditFood } from '../../components/ModalEditFood'
 import styles from './styles.module.scss'
 import { IFood } from '../../types'
 
 export function Dashboard() {
   const [foods, setFoods] = useState<IFood[]>([])
-  const [editingFood, setEditingFood] = useState({})
+  const [editingFood, setEditingFood] = useState<IFood>({} as IFood)
   const [modalOpen, setModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
 
@@ -32,10 +32,7 @@ export function Dashboard() {
     }
   }
 
-  /*
-  const handleUpdateFood = async (food) => {
-    const { foods, editingFood } = this.state
-
+  const handleUpdateFood = async (food: IFood) => {
     try {
       const foodUpdated = await api.put(`/foods/${editingFood.id}`, {
         ...editingFood,
@@ -46,12 +43,11 @@ export function Dashboard() {
         f.id !== foodUpdated.data.id ? f : foodUpdated.data
       )
 
-      this.setState({ foods: foodsUpdated })
+      setFoods(foodsUpdated)
     } catch (err) {
       console.log(err)
     }
   }
-  */
 
   const handleDeleteFood = async (id: number) => {
     await api.delete(`/foods/${id}`)
@@ -86,14 +82,13 @@ export function Dashboard() {
         setIsOpen={toggleModal}
         handleAddFood={handleAddFood}
       />
-      {/*
+
       <ModalEditFood
         isOpen={editModalOpen}
-        setIsOpen={this.toggleEditModal}
+        setIsOpen={toggleEditModal}
         editingFood={editingFood}
-        handleUpdateFood={this.handleUpdateFood}
+        handleUpdateFood={handleUpdateFood}
       />
-    */}
 
       <div className={styles.foodsContainer} data-testid="foods-list">
         {foods &&
