@@ -1,19 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Header } from '../../components/Header'
 import { api } from '../../services/api'
-// import Food from '../../components/Food'
+import { Food } from '../../components/Food'
 // import ModalAddFood from '../../components/ModalAddFood'
 // import ModalEditFood from '../../components/ModalEditFood'
 import styles from './styles.module.scss'
+import { IFood } from '../../types'
 
 export function Dashboard() {
-  const [foods, setFoods] = useState([])
+  const [foods, setFoods] = useState<IFood[]>([])
   const [editingFood, setEditingFood] = useState({})
   const [modalOpen, setModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
 
   async function componentDidMount() {
-    const foods = (await api.get('/foods')).data
+    const foods = (await api.get<IFood[]>('/foods')).data
 
     setFoods(foods)
   }
@@ -52,17 +53,15 @@ export function Dashboard() {
       console.log(err)
     }
   }
+  */
 
-  const handleDeleteFood = async (id) => {
-    const { foods } = this.state
-
+  const handleDeleteFood = async (id: number) => {
     await api.delete(`/foods/${id}`)
 
     const foodsFiltered = foods.filter((food) => food.id !== id)
 
-    this.setState({ foods: foodsFiltered })
+    setFoods(foodsFiltered)
   }
-  */
 
   const toggleModal = () => {
     setModalOpen(!modalOpen)
@@ -72,10 +71,14 @@ export function Dashboard() {
     setEditModalOpen(!editModalOpen)
   }
 
-  /*
-  const handleEditFood = (food) => {
-    this.setState({ editingFood: food, editModalOpen: true })
-  } */
+  const handleEditFood = (food: IFood) => {
+    setEditingFood(food)
+    setEditModalOpen(true)
+  }
+
+  useEffect(() => {
+    componentDidMount()
+  }, [])
 
   return (
     <>
@@ -91,6 +94,7 @@ export function Dashboard() {
         editingFood={editingFood}
         handleUpdateFood={this.handleUpdateFood}
       />
+    */}
 
       <div className={styles.foodsContainer} data-testid="foods-list">
         {foods &&
@@ -102,7 +106,7 @@ export function Dashboard() {
               handleEditFood={handleEditFood}
             />
           ))}
-      </div> */}
+      </div>
     </>
   )
 }
