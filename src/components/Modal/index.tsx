@@ -8,17 +8,11 @@ interface ModalProps {
 }
 
 export function Modal({ children, isOpen, setIsOpen }: ModalProps) {
-  const [modalStatus, setModalStatus] = useState(isOpen)
-
-  function componentDidUpdate() {
-    if (modalStatus !== isOpen) {
-      setModalStatus(isOpen)
-    }
-  }
+  const [modalStatus, setModalStatus] = useState(false)
 
   useEffect(() => {
-    componentDidUpdate()
-  }, [])
+    setModalStatus(isOpen)
+  }, [isOpen])
 
   return (
     <ReactModal

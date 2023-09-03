@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Header } from '../../components/Header'
 import { api } from '../../services/api'
 import { Food } from '../../components/Food'
-// import ModalAddFood from '../../components/ModalAddFood'
+import { ModalAddFood } from '../../components/ModalAddFood'
 // import ModalEditFood from '../../components/ModalEditFood'
 import styles from './styles.module.scss'
 import { IFood } from '../../types'
@@ -19,22 +19,20 @@ export function Dashboard() {
     setFoods(foods)
   }
 
-  /*
-  const handleAddFood = async (food) => {
-    const { foods } = this.state
-
+  const handleAddFood = async (food: IFood) => {
     try {
       const response = await api.post('/foods', {
         ...food,
         available: true
       })
 
-      this.setState({ foods: [...foods, response.data] })
+      setFoods([...foods, response.data])
     } catch (err) {
       console.log(err)
     }
   }
 
+  /*
   const handleUpdateFood = async (food) => {
     const { foods, editingFood } = this.state
 
@@ -83,11 +81,12 @@ export function Dashboard() {
   return (
     <>
       <Header openModal={toggleModal} />
-      {/* <ModalAddFood
+      <ModalAddFood
         isOpen={modalOpen}
-        setIsOpen={this.toggleModal}
-        handleAddFood={this.handleAddFood}
+        setIsOpen={toggleModal}
+        handleAddFood={handleAddFood}
       />
+      {/*
       <ModalEditFood
         isOpen={editModalOpen}
         setIsOpen={this.toggleEditModal}
