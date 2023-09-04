@@ -9,6 +9,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    row-gap: 40px;
+
+    @media (max-width: 580px) {
+      flex-direction: column;
+    }
 
     nav {
       div {
@@ -25,6 +30,10 @@
 
           .text {
             padding: 16px 24px;
+
+            @media (max-width: 580px) {
+              display: flex;
+            }
           }
 
           .icon {
