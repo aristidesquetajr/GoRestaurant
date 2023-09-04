@@ -22,20 +22,28 @@ export function Modal({ children, isOpen, setIsOpen }: ModalProps) {
       ariaHideApp={false}
       style={{
         content: {
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-          background: '#F0F0F5',
-          color: '#000000',
+          background: '#c72828',
+          color: '#ffffff',
           borderRadius: '8px',
-          width: '736px',
-          border: 'none'
+          padding: 0,
+          maxWidth: '736px',
+          width: '100%',
+          position: 'relative',
+          border: 'none',
+          inset: 0
         },
         overlay: {
-          backgroundColor: '#121214e6'
+          backgroundColor: '#121214e6',
+
+          position: 'fixed',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }
       }}
     >

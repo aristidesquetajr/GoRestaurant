@@ -51,13 +51,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    row-gap: 20px;
 
     padding: 20px 30px;
     background: #e4e4eb;
     border-radius: 0px 0px 8px 8px;
 
+    @media (max-width: 380px) {
+      flex-direction: column;
+    }
+
     div.iconContainer {
       display: flex;
+
+      @media (max-width: 380px) {
+        order: 2;
+      }
 
       button {
         background: #fff;
